@@ -1,10 +1,16 @@
 {
   "name": "recursive-methods",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A module with several recursive methods",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tsc": "tsc",
+    "ntsc": "ntsc",
+    "ntscw":"ntsc --watch",
+    "watch": "webpack --watch",
+    "build": "webpack",
+    "test": "node test/index.js"
   },
   "keywords": [
     "ts",
@@ -14,6 +20,10 @@
   "author": "lam",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^2.6.2"
+    "ntypescript": "^1.201706190042.1",
+    "ts-loader": "^3.2.0",
+    "tsc": "^1.20150623.0",
+    "typescript": "^2.6.2",
+    "webpack": "^3.10.0"
   }
 }

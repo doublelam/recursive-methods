@@ -41,6 +41,12 @@ describe('Recursive Methods', () => {
     let fi = methods.filter;
 
     for (let v of [{
+        input: [v => v > 3, []],
+        output: []
+      }, {
+        input: [v => v > 3, [5]],
+        output: [5]
+      }, {
         input: [v => v > 3, [1, 2, 3, 4, 5, 6]],
         output: [4, 5, 6]
       }, {
@@ -65,6 +71,12 @@ describe('Recursive Methods', () => {
   describe('Sort', () => {
     let so = methods.sort;
     for (let v of [{
+        input: [(a, b) => a > b, []],
+        output: []
+      }, {
+        input: [(a, b) => a > b, [5]],
+        output: [5]
+      }, {
         input: [(a, b) => a > b, [1, 4, 5, 2, 8, 2, 4, 6]],
         output: [1, 2, 2, 4, 4, 5, 6, 8]
       }, {
@@ -80,6 +92,12 @@ describe('Recursive Methods', () => {
   describe('Extreme', () => {
     let ex = methods.extreme;
     for (let v of [{
+        input: [(a, b) => a > b, []],
+        output: void 0
+      }, {
+        input: [(a, b) => a > b, [5]],
+        output: 5
+      }, {
         input: [(a, b) => a > b, [1, 4, 5, 2, 8, 2, 4, 6]],
         output: 8
       }, {
@@ -110,12 +128,18 @@ describe('Recursive Methods', () => {
   describe('Whileis', () => {
     let wh = methods.whileis;
     for (let v of [{
+        input: [v => v > 4, []],
+        output: []
+      }, {
+        input: [v => v < 6, [5]],
+        output: [5]
+      }, {
         input: [v => v > 2, [1, 4, 5, 2, 8, 2, 4, 6]],
         output: []
       }, {
         input: [v => v > 3, [5, 6, 7, 8, 9, 3, 2, 1, 2, 8, 9]],
         output: [5, 6, 7, 8, 9]
-      },{
+      }, {
         input: [v => v < 10, [5, 6, 7, 8, 9, 3, 2, 1, 2, 8, 9]],
         output: [5, 6, 7, 8, 9, 3, 2, 1, 2, 8, 9]
       }]) {
@@ -128,18 +152,45 @@ describe('Recursive Methods', () => {
   describe('Drop', () => {
     let dr = methods.drop;
     for (let v of [{
+        input: [v => v === 9, []],
+        output: []
+      }, {
+        input: [v => v === 3, [5]],
+        output: [5]
+      }, {
         input: [v => v > 2, [1, 4, 5, 2, 8, 2, 4, 6]],
-        output: [1,5,2,8,2,4,6]
+        output: [1, 5, 2, 8, 2, 4, 6]
       }, {
         input: [v => v > 3, [5, 6, 7, 8, 9, 3, 2, 1, 2, 8, 9]],
         output: [6, 7, 8, 9, 3, 2, 1, 2, 8, 9]
-      },{
+      }, {
         input: [v => v === 9, [5, 6, 7, 8, 9, 3, 2, 1, 2, 8, 9]],
         output: [5, 6, 7, 8, 3, 2, 1, 2, 8, 9]
       }]) {
       it(`when input is [${v.input[0]},[${v.input[1]}]], should return [${v.output}]`, () => {
         // assert.equal(fi(v => v > 3, [1, 2, 3, 4, 5, 6]), [4, 5, 6])
         expect(dr(...v.input)).to.deep.equal(v.output);
+      })
+    }
+  });
+  describe('sorter', () => {
+    let sor = methods.sorter;
+    for (let v of [{
+        input: [(a, b) => a > b, []],
+        output: []
+      }, {
+        input: [(a, b) => a > b, [5]],
+        output: [5]
+      }, {
+        input: [(a, b) => a > b, [1, 4, 5, 2, 8, 2, 4, 6]],
+        output: [1, 2, 2, 4, 4, 5, 6, 8]
+      }, {
+        input: [(a, b) => a < b, [1, 4, 5, 2, 0, 8, 2, 4, 6]],
+        output: [8, 6, 5, 4, 4, 2, 2, 1, 0]
+      }]) {
+      it(`when input is [${v.input[0]},[${v.input[1]}]], should return [${v.output}]`, () => {
+        // assert.equal(fi(v => v > 3, [1, 2, 3, 4, 5, 6]), [4, 5, 6])
+        expect(sor(...v.input)).to.deep.equal(v.output);
       })
     }
   })

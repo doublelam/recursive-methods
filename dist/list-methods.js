@@ -43,6 +43,9 @@ exports.sort = function (func, list) {
  * @returns returns an element
  */
 exports.extreme = function (func, list) {
+    if (list.length <= 1) {
+        return list[0];
+    }
     var extremeI = function (fun, li, max) {
         var temMax = fun(max, li[0]) ? max : li[0];
         if (li.length <= 1) {
@@ -73,13 +76,14 @@ exports.whileis = function (func, list) {
  */
 exports.drop = function (func, list) {
     var dropI = function (sumArr, fun, li) {
-        if (fun(li[0])) {
-            if (li.length <= 1) {
-                return sumArr;
-            }
-            return sumArr.concat(li.slice(1));
+        if (!li.length) {
+            return sumArr;
         }
-        return dropI(sumArr.concat(li[0]), fun, li.slice(1));
+        var restVal = li.length <= 1 ? [] : li.slice(1);
+        if (fun(li[0])) {
+            return sumArr.concat(restVal);
+        }
+        return dropI(sumArr.concat(li[0]), fun, restVal);
     };
     return dropI([], func, list);
 };
@@ -89,12 +93,17 @@ exports.drop = function (func, list) {
  * @param list
  */
 exports.sorter = function (func, list) {
+    if (!list.length) {
+        return [];
+    }
     var sorterI = function (sumArr, fun, li) {
+        var extremeVal = exports.extreme(function (a, b) { return !fun(a, b); }, li);
+        var val = sumArr.concat(extremeVal);
         if (li.length <= 1) {
-            return sumArr;
+            return val;
         }
-        return sorterI(sumArr.concat(), fun, li.slice(1));
+        return sorterI(val, fun, exports.drop(function (v) { return v === extremeVal; }, li));
     };
-    return sorterI([], func, li);
+    return sorterI([], func, list);
 };
 //# sourceMappingURL=list-methods.js.map

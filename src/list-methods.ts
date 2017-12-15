@@ -44,6 +44,9 @@ export const sort = <T>(func: (a: T, b: T) => boolean, list: List<T>): List<T> =
  * @returns returns an element
  */
 export const extreme = <T>(func: (a: T, b: T) => boolean, list: List<T>): T => {
+  if (list.length <= 1) {
+    return list[0];
+  }
   const extremeI = (fun: (a: T, b: T) => boolean, li: List<T>, max: T): T => {
     const temMax = fun(max, li[0]) ? max : li[0];
     if (li.length <= 1) {
@@ -76,13 +79,14 @@ export const whileis = <T>(func: (v: T) => boolean, list: List<T>): List<T> => {
  */
 export const drop = <T>(func: (v: T) => boolean, list: List<T>): List<T> => {
   const dropI = (sumArr: List<T>, fun: (v: T) => boolean, li: List<T>) => {
-    if (fun(li[0])) {
-      if (li.length <= 1) {
-        return sumArr;
-      }
-      return sumArr.concat(li.slice(1));
+    if (!li.length) {
+      return sumArr;
     }
-    return dropI(sumArr.concat(li[0]), fun, li.slice(1));
+    const restVal = li.length <= 1 ? [] : li.slice(1);
+    if (fun(li[0])) {
+      return sumArr.concat(restVal);
+    }
+    return dropI(sumArr.concat(li[0]), fun, restVal);
   };
   return dropI([], func, list);
 };
@@ -93,12 +97,18 @@ export const drop = <T>(func: (v: T) => boolean, list: List<T>): List<T> => {
  * @param list 
  */
 export const sorter = <T>(func: (a: T, b: T) => boolean, list: List<T>): List<T> => {
-  const sorterI = (sumArr, fun, li) => {
-
-    if (li.length <= 1) {
-      return sumArr;
-    }
-    return sorterI(sumArr.concat(), fun, li.slice(1));
+  if (!list.length) {
+    return [];
   }
-  return sorterI([], func, li);
+  const sorterI = (sumArr: List<T>, fun: (a: T, b: T) => boolean, li: List<T>) => {
+    const extremeVal = extreme((a, b) => !fun(a, b), li);
+    const val = sumArr.concat(extremeVal);
+    if (li.length <= 1) {
+      return val;
+    }
+    return sorterI(val,
+      fun,
+      drop(v => v === extremeVal, li));
+  };
+  return sorterI([], func, list);
 };

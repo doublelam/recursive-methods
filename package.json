@@ -7,10 +7,10 @@
   "scripts": {
     "tsc": "tsc",
     "ntsc": "ntsc",
-    "ntscw":"ntsc --watch",
+    "ntscw": "ntsc --watch",
     "watch": "webpack --watch",
     "build": "webpack",
-    "test": "node test/index.js"
+    "test": "mocha test/index.js"
   },
   "keywords": [
     "ts",
@@ -25,5 +25,9 @@
     "tsc": "^1.20150623.0",
     "typescript": "^2.6.2",
     "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1"
   }
 }

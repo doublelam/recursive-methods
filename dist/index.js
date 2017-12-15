@@ -4,4 +4,5 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./sequence"));
+__export(require("./list-methods"));
 //# sourceMappingURL=index.js.map

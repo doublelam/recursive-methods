@@ -193,5 +193,26 @@ describe('Recursive Methods', () => {
         expect(sor(...v.input)).to.deep.equal(v.output);
       })
     }
+  });
+  describe('Map', () => {
+    let map = methods.map;
+    for (let v of [{
+        input: [(v, i) => v + i, []],
+        output: []
+      }, {
+        input: [(v, i) => v + i, ['dd']],
+        output: ['dd0']
+      }, {
+        input: [(v, i) => `Value: ${v}, Index: ${i}`, ['value1', 'value2', 'value3']],
+        output: ['Value: value1, Index: 0', 'Value: value2, Index: 1', 'Value: value3, Index: 2']
+      }, {
+        input: [(v, i) => i, [1, 4, 5, 2, 0, 8, 2, 4, 6]],
+        output: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+      }]) {
+      it(`when input is [${v.input[0]},[${v.input[1]}]], should return [${v.output}]`, () => {
+        // assert.equal(fi(v => v > 3, [1, 2, 3, 4, 5, 6]), [4, 5, 6])
+        expect(map(...v.input)).to.deep.equal(v.output);
+      })
+    }
   })
 })

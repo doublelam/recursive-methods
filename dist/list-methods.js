@@ -106,4 +106,22 @@ exports.sorter = function (func, list) {
     };
     return sorterI([], func, list);
 };
+/**
+ *
+ * @param func
+ * @param list
+ */
+exports.map = function (func, list) {
+    if (!list.length) {
+        return [];
+    }
+    var mapI = function (sumArr, index, fun, li) {
+        var currentEle = sumArr.concat(fun(li[0], index));
+        if (li.length <= 1) {
+            return currentEle;
+        }
+        return mapI(currentEle, index + 1, fun, li.slice(1));
+    };
+    return mapI([], 0, func, list);
+};
 //# sourceMappingURL=list-methods.js.map

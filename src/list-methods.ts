@@ -112,3 +112,22 @@ export const sorter = <T>(func: (a: T, b: T) => boolean, list: List<T>): List<T>
   };
   return sorterI([], func, list);
 };
+
+/**
+ * 
+ * @param func 
+ * @param list 
+ */
+export const map = <T>(func: (val: T, index: number) => any, list: List<T>): any[] => {
+  if (!list.length) {
+    return [];
+  }
+  const mapI = (sumArr: any[], index: number, fun: (val: T, index: number) => any, li: List<T>): any[] => {
+    const currentEle = sumArr.concat(fun(li[0], index));
+    if (li.length <= 1) {
+      return currentEle;
+    }
+    return mapI(currentEle, index + 1, fun, li.slice(1));
+  };
+  return mapI([], 0, func, list);
+};

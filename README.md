@@ -38,7 +38,7 @@ return a sorted list, but it has trail optimization
 // return [1,2,2,4,4,5,6,8]
 ```
 ### .extreme(func, list)
-return a extreme value
+return an extreme value
 ``` js
 .extreme((a, b) => a > b, [1,4,5,2,8,2,4,6]);
 // return 8
@@ -57,6 +57,14 @@ return the rest list which dropping one specific value
 .drop(v => v === 9,[5,6,7,8,9,3,2,1,2,8,9]);
 // return [5,6,7,8,3,2,1,2,8,9]
 ```
+
+### .map(func, list)
+return a list that created by the input function returned value
+``` js
+.map((v, i) => `Value: ${v}, Index: ${i}`, ['value1', 'value2', 'value3']);
+// return [Value: value1, Index: 0,Value: value2, Index: 1,Value: value3, Index: 2]
+```
+
   
   
 

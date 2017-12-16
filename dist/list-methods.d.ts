@@ -38,3 +38,9 @@ export declare const drop: <T>(func: (v: T) => boolean, list: T[]) => T[];
  * @param list
  */
 export declare const sorter: <T>(func: (a: T, b: T) => boolean, list: T[]) => T[];
+/**
+ *
+ * @param func
+ * @param list
+ */
+export declare const map: <T>(func: (val: T, index: number) => any, list: T[]) => any[];

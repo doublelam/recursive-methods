@@ -55,7 +55,7 @@ return an extreme value
 ```
 
 ### .whileis(func, list)
-return the forest list slice when the values matched
+return the slice when the values matched
 ``` js
 .whileis(v => v > 3,[5,6,7,8,9,3,2,1,2,8,9]);
 // return [5,6,7,8,9]
@@ -69,7 +69,7 @@ return the rest list which dropping one specific value
 ```
 
 ### .map(func, list)
-return a list that created by the input function returned value
+return a list that created by the returned value of the input function
 ``` js
 .map((v, i) => `Value: ${v}, Index: ${i}`, ['value1', 'value2', 'value3']);
 // return [Value: value1, Index: 0,Value: value2, Index: 1,Value: value3, Index: 2]

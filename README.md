@@ -1,4 +1,6 @@
 # Get starting
+This package includes several recursive methods. The functions of them are as same as the js native methods such as Array.sort, Array.map. The difference of them is that these method is recursive methods and with trail optimization, so be caution that sometimes you may encounter the exception of stack overflow, because js dose not support trail optimization. 
+
 ## Install
 ```
 npm install recursive-methods --save
@@ -15,9 +17,17 @@ console.log(greatest);
 ## Methods
 ### .fibonacci(n)
 return a fibonacci number
+``` js
+.finonacci(0); .fibonacci(1); .fibonacci(2);
+// Individually return 1; 1; 2;
+```
 
 ### .fibonacciArr(n)
-return a fibonacci list
+return a fibonacci list]
+``` js
+.finonacciArr(0); .fibonacciArr(1); .fibonacciArr(2);
+// Individually return [1]; [1, 1]; [1, 1, 2];
+```
 
 ### .filter(func, list)
 return a filtered list
@@ -65,7 +75,9 @@ return a list that created by the input function returned value
 // return [Value: value1, Index: 0,Value: value2, Index: 1,Value: value3, Index: 2]
 ```
 
-  
-  
+## Author
+[lam](https://github.com/doublelam)
 
+## Project on Github
+[The project address on github](https://github.com/doublelam/recursive-methods)
 

@@ -1,5 +1,5 @@
 # Get starting
-This package includes several recursive methods. The functions of them are as same as the js native methods such as Array.sort, Array.map. The difference of them is that these method is recursive methods and with trail optimization, so be caution that sometimes you may encounter the exception of stack overflow, because js dose not support trail optimization. 
+This package includes several recursive methods. The functions of them are as same as the js native methods such as Array.sort, Array.map. The difference of them is that these methods are recursive methods and with trail optimization, so be caution that sometimes you may encounter the exception of stack overflow, because js dose not support trail optimization. 
 
 ## Install
 ```

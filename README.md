@@ -1,5 +1,5 @@
 # Get starting
-This package includes several recursive methods. The functions of them are as same as the js native methods such as Array.sort, Array.map. The difference of them is that these methods are recursive methods and with trail optimization, so be caution that sometimes you may encounter the exception of stack overflow, because js dose not support trail optimization. 
+This package includes several recursive methods. The functions of them are as same as the js native methods such as Array.sort, Array.map. The difference of them is that these methods are recursive methods and with trail optimization, so be caution that sometimes you may encounter the exception of stack overflow, because js does not support trail optimization. 
 
 ## Install
 ```
@@ -7,12 +7,22 @@ npm install recursive-methods --save
 ```
 ## Usage
 
+javascript
 ``` js
 const recursiveMethods = require('recursive-methods');
 
 const greatest = recursiveMethods.extreme((a, b) => a > b,[1, 2, 3, 4, 5, 6, 7, 8]);
 console.log(greatest);
 // 8
+```
+
+typescript
+``` ts
+import { map } from 'recursive-methods';
+const list = ['one', 'two', 'three', 'four', 'five'];
+const newList = map((v, i) => v + String(i), lists);
+console.log(newList);
+// ['one0', 'two1', 'three2', 'four3', 'five4']
 ```
 ## Methods
 ### .fibonacci(n)
@@ -23,7 +33,7 @@ return a fibonacci number
 ```
 
 ### .fibonacciArr(n)
-return a fibonacci list]
+return a fibonacci list
 ``` js
 .finonacciArr(0); .fibonacciArr(1); .fibonacciArr(2);
 // Individually return [1]; [1, 1]; [1, 1, 2];
@@ -35,18 +45,21 @@ return a filtered list
 .filter(v => v > 5, [1, 2, 3, 4, 5, 6, 7, 8]);
 // return [6, 7, 8]
 ```
+
 ### .sort(func, list)
 return a sorted list
 ``` js
 .sort((a, b) => a > b, [1,4,5,2,8,2,4,6]);
 // return [1,2,2,4,4,5,6,8]
 ```
+
 ### .sorter(func, list)
 return a sorted list, but it has trail optimization
 ``` js
 .sorter((a, b) => a > b,[1,4,5,2,8,2,4,6]);
 // return [1,2,2,4,4,5,6,8]
 ```
+
 ### .extreme(func, list)
 return an extreme value
 ``` js
@@ -73,6 +86,17 @@ return a list that created by the returned value of the input function
 ``` js
 .map((v, i) => `Value: ${v}, Index: ${i}`, ['value1', 'value2', 'value3']);
 // return [Value: value1, Index: 0,Value: value2, Index: 1,Value: value3, Index: 2]
+```
+
+### .congruence(param, param)
+Compare the two values, return false or true
+``` js
+.congruence({a: [{b:'one', c: [222,'dd']}]},{a: [{b:'one', c: [222,'dd']}]});
+// return true
+.congruence({a: [{b:'one', c: [223,'dd']}]},{a: [{b:'one', c: [222,'dd']}]});
+// return false
+.congruence((a, b) => a + b,(a, b) => a + b);
+// return true
 ```
 
 ## Author

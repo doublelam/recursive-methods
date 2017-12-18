@@ -1,3 +1,4 @@
+import { DataType } from "./types/types";
 /**
  *
  * @param func
@@ -44,3 +45,17 @@ export declare const sorter: <T>(func: (a: T, b: T) => boolean, list: T[]) => T[
  * @param list
  */
 export declare const map: <T>(func: (val: T, index: number) => any, list: T[]) => any[];
+/**
+ * A function that get the type of the input
+ *
+ * @param param
+ * @return return the type of the input
+ */
+export declare const getType: (param: any) => DataType;
+/**
+ * compare if two input values equals
+ *
+ * @param a First value
+ * @param b Second value
+ */
+export declare const congruence: (a: any, b: any) => boolean;

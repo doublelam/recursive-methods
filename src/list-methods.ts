@@ -1,5 +1,5 @@
 import { List } from "./types/types";
-
+import { DataType } from "./types/types";
 /**
  * 
  * @param func 
@@ -130,4 +130,79 @@ export const map = <T>(func: (val: T, index: number) => any, list: List<T>): any
     return mapI(currentEle, index + 1, fun, li.slice(1));
   };
   return mapI([], 0, func, list);
+};
+
+/**
+ * A function that get the type of the input
+ * 
+ * @param param 
+ * @return return the type of the input
+ */
+export const getType = (param: any): DataType => {
+  if (Array.isArray(param)) {
+    return "array";
+  }
+  if (param instanceof Date) {
+    return "date";
+  }
+  if (param === null) {
+    return null;
+  }
+  if (param instanceof RegExp) {
+    return "regExp";
+  }
+  if (param instanceof Error) {
+    return "error";
+  }
+  return typeof param;
+};
+
+/**
+ * compare if two input values equals
+ * 
+ * @param a First value
+ * @param b Second value
+ */
+export const congruence = (a: any, b: any): boolean => {
+  const typeFirst = getType(a);
+  if (typeFirst !== getType(b)) {
+    return false;
+  }
+  const TYPE_METHODS_MAP = {
+    array: (x: any[], y: any[]): boolean => {
+      if (x.length !== y.length) { return false; }
+      const ifEqual = (pre: any[], nex: any[]): boolean => {
+        const compareFirst = congruence(pre[0], nex[0]);
+        if (pre.length <= 1) {
+          return compareFirst;
+        }
+        return compareFirst && TYPE_METHODS_MAP.array(pre.slice(1), nex.slice(1));
+      };
+      return ifEqual(x, y);
+    },
+    function: (x: () => any, y: () => any): boolean => {
+      return String(x) === String(y);
+    },
+    object: (x: { [key: string]: any }, y: { [key: string]: any }) => {
+      const xKeys = Object.keys(x);
+      const yKeys = Object.keys(y);
+      if (xKeys.length !== yKeys.length) {
+        return false;
+      }
+      const ifKeysEqual = TYPE_METHODS_MAP.array(xKeys, yKeys);
+      const ifEqual = (keys: string[]): boolean => {
+        if (keys.length <= 0) {
+          return true;
+        }
+        const compareFirst = congruence(x[keys[0]], y[keys[0]]);
+        if (keys.length <= 1) {
+          return compareFirst;
+        }
+        return compareFirst && ifEqual(keys.slice(1));
+      };
+      return ifKeysEqual && ifEqual(xKeys);
+    },
+    otherwise: (x: any, y: any): boolean => a === b,
+  };
+  return (TYPE_METHODS_MAP[typeFirst] || TYPE_METHODS_MAP.otherwise)(a, b);
 };

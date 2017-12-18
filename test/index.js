@@ -214,5 +214,60 @@ describe('Recursive Methods', () => {
         expect(map(...v.input)).to.deep.equal(v.output);
       })
     }
+  });
+  describe('Congruence', () => {
+    let equals = methods.congruence;
+    for (let v of [{
+        input: [
+          [],
+          []
+        ],
+        output: true
+      }, {
+        input: [
+          [2, 4],
+          [2, 4]
+        ],
+        output: true
+      }, {
+        input: ['33', 4],
+        output: false
+      }, {
+        input: [{
+          a: 9,
+          b: 10
+        }, {
+          a: 9,
+          b: 10
+        }],
+        output: true
+      }, {
+        input: [{
+          a: {
+            ee: ['sss', {
+              ss: 'dsds',
+              ee: ['34', '34', 55]
+            }]
+          },
+          b: 10
+        }, {
+          a: {
+            ee: ['sss', {
+              ss: 'dsds',
+              ee: ['34', '33', 55]
+            }]
+          },
+          b: 10
+        }],
+        output: false
+      }, {
+        input: [e => e + 's', e => e + 's'],
+        output: true
+      }]) {
+      it(`when input is [${v.input[0]},[${v.input[1]}]], should return [${v.output}]`, () => {
+        // assert.equal(fi(v => v > 3, [1, 2, 3, 4, 5, 6]), [4, 5, 6])
+        expect(equals(...v.input)).to.deep.equal(v.output);
+      })
+    }
   })
 })

@@ -26,63 +26,63 @@ console.log(newList);
 ```
 ## Methods
 ### .fibonacci(n)
-return a fibonacci number
+Return a fibonacci number
 ``` js
 .finonacci(0); .fibonacci(1); .fibonacci(2);
 // Individually return 1; 1; 2;
 ```
 
 ### .fibonacciArr(n)
-return a fibonacci list
+Return a fibonacci list
 ``` js
 .finonacciArr(0); .fibonacciArr(1); .fibonacciArr(2);
 // Individually return [1]; [1, 1]; [1, 1, 2];
 ```
 
 ### .filter(func, list)
-return a filtered list
+Return a filtered list
 ``` js
 .filter(v => v > 5, [1, 2, 3, 4, 5, 6, 7, 8]);
 // return [6, 7, 8]
 ```
 
 ### .sort(func, list)
-return a sorted list
+Return a sorted list
 ``` js
 .sort((a, b) => a > b, [1,4,5,2,8,2,4,6]);
 // return [1,2,2,4,4,5,6,8]
 ```
 
 ### .sorter(func, list)
-return a sorted list, but it has trail optimization
+Return a sorted list, but it has trail optimization
 ``` js
 .sorter((a, b) => a > b,[1,4,5,2,8,2,4,6]);
 // return [1,2,2,4,4,5,6,8]
 ```
 
 ### .extreme(func, list)
-return an extreme value
+Return an extreme value
 ``` js
 .extreme((a, b) => a > b, [1,4,5,2,8,2,4,6]);
 // return 8
 ```
 
 ### .whileis(func, list)
-return the slice when the values matched
+Return the slice when the values matched
 ``` js
 .whileis(v => v > 3,[5,6,7,8,9,3,2,1,2,8,9]);
 // return [5,6,7,8,9]
 ```
 
 ### .drop(func, list)
-return the rest list which dropping one specific value
+Return the rest list which dropping one specific value
 ``` js
 .drop(v => v === 9,[5,6,7,8,9,3,2,1,2,8,9]);
 // return [5,6,7,8,3,2,1,2,8,9]
 ```
 
 ### .map(func, list)
-return a list that created by the returned value of the input function
+Return a list that created by the returned value of the input function
 ``` js
 .map((v, i) => `Value: ${v}, Index: ${i}`, ['value1', 'value2', 'value3']);
 // return [Value: value1, Index: 0,Value: value2, Index: 1,Value: value3, Index: 2]
@@ -91,24 +91,24 @@ return a list that created by the returned value of the input function
 ### .isCongruence(param, param)
 Compare the two values, return false or true
 ``` js
-.congruence({a: [{b:'one', c: [222,'dd']}]},{a: [{b:'one', c: [222,'dd']}]});
+.isCongruence({a: [{b:'one', c: [222,'dd']}]},{a: [{b:'one', c: [222,'dd']}]});
 // return true
-.congruence({a: [{b:'one', c: [223,'dd']}]},{a: [{b:'one', c: [222,'dd']}]});
+.isCongruence({a: [{b:'one', c: [223,'dd']}]},{a: [{b:'one', c: [222,'dd']}]});
 // return false
-.congruence((a, b) => a + b,(a, b) => a + b);
+.isCongruence((a, b) => a + b,(a, b) => a + b);
 // return true
 ```
+
 ### .reverse(list)
-return a serversed list
+Return a serversed list
 ``` js
 .reverse([1, 2, 3, 4, 5, 6]);
 // return [6, 5, 4, 3, 2, 1]
 ```
 
-# .fragment(gap, func, list)
-return a list which created by the returned value of the parameter func,
-and return the slice list per several elements of the parameter list
-
+### .fragment(gap, func, list)
+Return a list which created by the returned value of the parameter func.
+The difference between function map and this function is that this function do not loop every element of the list, it depends on the specific parameter gap
 ``` js
 .fragment(
   3, 

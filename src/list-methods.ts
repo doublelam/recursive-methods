@@ -34,7 +34,7 @@ export const sort = <T>(func: (a: T, b: T) => boolean, list: List<T>): List<T> =
 
   const rightVals = sort(func, filter(v =>
     !func(list[0], v), list.slice(1)));
-  return leftVals.concat(midVal).concat(rightVals);
+  return leftVals.concat([midVal]).concat(rightVals);
 };
 
 /**
@@ -67,7 +67,7 @@ export const whileis = <T>(func: (v: T) => boolean, list: List<T>): List<T> => {
     if (!fun(li[0]) || li.length <= 0) {
       return sumArr;
     }
-    return whileisI(sumArr.concat(li[0]), fun, li.slice(1));
+    return whileisI(sumArr.concat([li[0]]), fun, li.slice(1));
   };
   return whileisI([], func, list);
 };
@@ -102,7 +102,7 @@ export const sorter = <T>(func: (a: T, b: T) => boolean, list: List<T>): List<T>
   }
   const sorterI = (sumArr: List<T>, fun: (a: T, b: T) => boolean, li: List<T>) => {
     const extremeVal = extreme((a, b) => !fun(a, b), li);
-    const val = sumArr.concat(extremeVal);
+    const val = sumArr.concat([extremeVal]);
     if (li.length <= 1) {
       return val;
     }
@@ -123,7 +123,7 @@ export const map = <T>(func: (val: T, index: number) => any, list: List<T>): any
     return [];
   }
   const mapI = (sumArr: any[], index: number, fun: (val: T, index: number) => any, li: List<T>): any[] => {
-    const currentEle = sumArr.concat(fun(li[0], index));
+    const currentEle = sumArr.concat([fun(li[0], index)]);
     if (li.length <= 1) {
       return currentEle;
     }
@@ -163,7 +163,7 @@ export const getType = (param: any): DataType => {
  * @param a First value
  * @param b Second value
  */
-export const congruence = (a: any, b: any): boolean => {
+export const isCongruence = (a: any, b: any): boolean => {
   const typeFirst = getType(a);
   if (typeFirst !== getType(b)) {
     return false;
@@ -172,7 +172,7 @@ export const congruence = (a: any, b: any): boolean => {
     array: (x: any[], y: any[]): boolean => {
       if (x.length !== y.length) { return false; }
       const ifEqual = (pre: any[], nex: any[]): boolean => {
-        const compareFirst = congruence(pre[0], nex[0]);
+        const compareFirst = isCongruence(pre[0], nex[0]);
         if (pre.length <= 1) {
           return compareFirst;
         }
@@ -194,7 +194,7 @@ export const congruence = (a: any, b: any): boolean => {
         if (keys.length <= 0) {
           return true;
         }
-        const compareFirst = congruence(x[keys[0]], y[keys[0]]);
+        const compareFirst = isCongruence(x[keys[0]], y[keys[0]]);
         if (keys.length <= 1) {
           return compareFirst;
         }
@@ -205,4 +205,51 @@ export const congruence = (a: any, b: any): boolean => {
     otherwise: (x: any, y: any): boolean => a === b,
   };
   return (TYPE_METHODS_MAP[typeFirst] || TYPE_METHODS_MAP.otherwise)(a, b);
+};
+
+/**
+ * A function would reverse the input list
+ * 
+ * @param list list
+ * @returns return a list
+ */
+export const reverse = <T>(list: List<T>): List<T> => {
+  if (!list.length) {
+    return list;
+  }
+  const reverseI = (outputArr: List<T>, li: List<T>): List<T> => {
+    const currentEle = [li[0]].concat(outputArr);
+    if (li.length <= 1) {
+      return currentEle;
+    }
+    return reverseI(currentEle, li.slice(1));
+  };
+  return reverseI([], list);
+};
+
+/**
+ * A function 
+ * 
+ * @param gap 
+ * @param func 
+ * @param list 
+ */
+export const fragment = <T>(gap: number, func: (val: List<T>, index: number) => any, list: List<T>): any[] => {
+  if (!list.length) {
+    return [];
+  }
+  if (gap <= 0) {
+    const error = new Error();
+    error.message = "The first parameter should be a positive number";
+    throw error;
+  }
+  const fragmentI = (arr: any[], index: number, gapN: number, fun: (v: List<T>, i: number) => any, li: List<T>) => {
+    const frag = fun(li.slice(0, gapN), index);
+    const sumArr = arr.concat([frag]);
+    if (li.length <= gap) {
+      return sumArr;
+    }
+    return fragmentI(sumArr, index + 1, gapN, fun, li.slice(gapN));
+  };
+  return fragmentI([], 0, gap, func, list);
 };

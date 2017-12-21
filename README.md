@@ -88,7 +88,7 @@ return a list that created by the returned value of the input function
 // return [Value: value1, Index: 0,Value: value2, Index: 1,Value: value3, Index: 2]
 ```
 
-### .congruence(param, param)
+### .isCongruence(param, param)
 Compare the two values, return false or true
 ``` js
 .congruence({a: [{b:'one', c: [222,'dd']}]},{a: [{b:'one', c: [222,'dd']}]});
@@ -97,6 +97,28 @@ Compare the two values, return false or true
 // return false
 .congruence((a, b) => a + b,(a, b) => a + b);
 // return true
+```
+### .reverse(list)
+return a serversed list
+``` js
+.reverse([1, 2, 3, 4, 5, 6]);
+// return [6, 5, 4, 3, 2, 1]
+```
+
+# .fragment(gap, func, list)
+return a list which created by the returned value of the parameter func,
+and return the slice list per several elements of the parameter list
+
+``` js
+.fragment(
+  3, 
+  (v, i) => (v[0] || 0) + (v[1] || 0) + (v[2] || 0),
+  [1, 2, 3, 4, 5, 6, 7, 8]
+);
+// return [6, 15, 15]
+
+.fragment(3, (v, i) => v, [22, 33, 44, 55, 66, 77, 88, 99, 12, 12, 124]);
+// return [[22, 33, 44], [55, 66, 77], [88, 99, 12], [12, 124]]
 ```
 
 ## Author

@@ -34,7 +34,7 @@ exports.sort = function (func, list) {
     var rightVals = exports.sort(func, exports.filter(function (v) {
         return !func(list[0], v);
     }, list.slice(1)));
-    return leftVals.concat(midVal).concat(rightVals);
+    return leftVals.concat([midVal]).concat(rightVals);
 };
 /**
  *
@@ -65,7 +65,7 @@ exports.whileis = function (func, list) {
         if (!fun(li[0]) || li.length <= 0) {
             return sumArr;
         }
-        return whileisI(sumArr.concat(li[0]), fun, li.slice(1));
+        return whileisI(sumArr.concat([li[0]]), fun, li.slice(1));
     };
     return whileisI([], func, list);
 };
@@ -98,7 +98,7 @@ exports.sorter = function (func, list) {
     }
     var sorterI = function (sumArr, fun, li) {
         var extremeVal = exports.extreme(function (a, b) { return !fun(a, b); }, li);
-        var val = sumArr.concat(extremeVal);
+        var val = sumArr.concat([extremeVal]);
         if (li.length <= 1) {
             return val;
         }
@@ -116,7 +116,7 @@ exports.map = function (func, list) {
         return [];
     }
     var mapI = function (sumArr, index, fun, li) {
-        var currentEle = sumArr.concat(fun(li[0], index));
+        var currentEle = sumArr.concat([fun(li[0], index)]);
         if (li.length <= 1) {
             return currentEle;
         }
@@ -154,7 +154,7 @@ exports.getType = function (param) {
  * @param a First value
  * @param b Second value
  */
-exports.congruence = function (a, b) {
+exports.isCongruence = function (a, b) {
     var typeFirst = exports.getType(a);
     if (typeFirst !== exports.getType(b)) {
         return false;
@@ -165,7 +165,7 @@ exports.congruence = function (a, b) {
                 return false;
             }
             var ifEqual = function (pre, nex) {
-                var compareFirst = exports.congruence(pre[0], nex[0]);
+                var compareFirst = exports.isCongruence(pre[0], nex[0]);
                 if (pre.length <= 1) {
                     return compareFirst;
                 }
@@ -187,7 +187,7 @@ exports.congruence = function (a, b) {
                 if (keys.length <= 0) {
                     return true;
                 }
-                var compareFirst = exports.congruence(x[keys[0]], y[keys[0]]);
+                var compareFirst = exports.isCongruence(x[keys[0]], y[keys[0]]);
                 if (keys.length <= 1) {
                     return compareFirst;
                 }
@@ -198,5 +198,50 @@ exports.congruence = function (a, b) {
         otherwise: function (x, y) { return a === b; },
     };
     return (TYPE_METHODS_MAP[typeFirst] || TYPE_METHODS_MAP.otherwise)(a, b);
+};
+/**
+ * A function would reverse the input list
+ *
+ * @param list list
+ * @returns return a list
+ */
+exports.reverse = function (list) {
+    if (!list.length) {
+        return list;
+    }
+    var reverseI = function (outputArr, li) {
+        var currentEle = [li[0]].concat(outputArr);
+        if (li.length <= 1) {
+            return currentEle;
+        }
+        return reverseI(currentEle, li.slice(1));
+    };
+    return reverseI([], list);
+};
+/**
+ * A function
+ *
+ * @param gap
+ * @param func
+ * @param list
+ */
+exports.fragment = function (gap, func, list) {
+    if (!list.length) {
+        return [];
+    }
+    if (gap <= 0) {
+        var error = new Error();
+        error.message = "The first parameter should be a positive number";
+        throw error;
+    }
+    var fragmentI = function (arr, index, gapN, fun, li) {
+        var frag = fun(li.slice(0, gapN), index);
+        var sumArr = arr.concat([frag]);
+        if (li.length <= gap) {
+            return sumArr;
+        }
+        return fragmentI(sumArr, index + 1, gapN, fun, li.slice(gapN));
+    };
+    return fragmentI([], 0, gap, func, list);
 };
 //# sourceMappingURL=list-methods.js.map

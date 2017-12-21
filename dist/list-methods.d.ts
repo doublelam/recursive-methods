@@ -58,4 +58,19 @@ export declare const getType: (param: any) => DataType;
  * @param a First value
  * @param b Second value
  */
-export declare const congruence: (a: any, b: any) => boolean;
+export declare const isCongruence: (a: any, b: any) => boolean;
+/**
+ * A function would reverse the input list
+ *
+ * @param list list
+ * @returns return a list
+ */
+export declare const reverse: <T>(list: T[]) => T[];
+/**
+ * A function
+ *
+ * @param gap
+ * @param func
+ * @param list
+ */
+export declare const fragment: <T>(gap: number, func: (val: T[], index: number) => any, list: T[]) => any[];

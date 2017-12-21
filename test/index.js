@@ -216,7 +216,7 @@ describe('Recursive Methods', () => {
     }
   });
   describe('Congruence', () => {
-    let equals = methods.congruence;
+    let equals = methods.isCongruence;
     for (let v of [{
         input: [
           [],
@@ -269,5 +269,70 @@ describe('Recursive Methods', () => {
         expect(equals(...v.input)).to.deep.equal(v.output);
       })
     }
-  })
+  });
+  describe('Reverse', () => {
+    let rev = methods.reverse;
+    for (let v of [{
+        input: [
+          ['33', '55', '66', '88']
+        ],
+        output: ['88', '66', '55', '33']
+      }, {
+        input: [
+          [2, 3, 4, 5, 6, 7, 8, 9, 10]
+        ],
+        output: [10, 9, 8, 7, 6, 5, 4, 3, 2]
+      }, {
+        input: [
+          ['33', 4]
+        ],
+        output: [4, '33']
+      }, {
+        input: [
+          []
+        ],
+        output: []
+      }]) {
+      it(`when input is [${v.input[0]}], should return [${v.output}]`, () => {
+        // assert.equal(fi(v => v > 3, [1, 2, 3, 4, 5, 6]), [4, 5, 6])
+        expect(rev(...v.input)).to.deep.equal(v.output);
+      })
+    }
+  });
+  describe('Fragment', () => {
+    let frag = methods.fragment;
+    it('input: (0, v => v, [1,2,3,4,5,6,7])', () => {
+      expect(frag.bind(null, 0, [1, 2, 3, 4, 5, 6, 7])).to.throw();
+    });
+    it('input: (-2, v => v, [1,2,3,4,5,6,7])', () => {
+      expect(frag.bind(null, -2, [1, 2, 3, 4, 5, 6, 7])).to.throw();
+    });
+    for (let v of [{
+        input: [3, (v, i) => v, [22, 33, 44, 55, 66, 77, 88, 99, 12, 12, 124]],
+        output: [
+          [22, 33, 44],
+          [55, 66, 77],
+          [88, 99, 12],
+          [12, 124]
+        ]
+      }, {
+        input: [3, (v, i) => (v[0] || 0) + (v[1] || 0) + (v[2] || 0), [22, 33, 44, 55, 66, 77, 88, 99, 12, 12, 124, 44]],
+        output: [99, 198, 199, 180]
+      }, {
+        input: [4, (v, i) => v.concat([i]), [2, 2, 2, 2, 2]],
+        output: [
+          [2, 2, 2, 2, 0],
+          [2, 1]
+        ]
+      }, {
+        input: [10, (v, i) => v, []],
+        output: []
+      }]) {
+      it(`when input is [${v.input[0]}, ${v.input[1]}, ${v.input[2]}], should return [${v.output}]`, () => {
+        // assert.equal(fi(v => v > 3, [1, 2, 3, 4, 5, 6]), [4, 5, 6])
+        expect(frag(...v.input)).to.deep.equal(v.output);
+      })
+    }
+  });
+
 })

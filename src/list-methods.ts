@@ -1,5 +1,4 @@
-import { List } from "./types/types";
-import { DataType } from "./types/types";
+import { DataType, List } from "./types/types";
 /**
  * 
  * @param func 
@@ -170,6 +169,9 @@ export const isCongruence = (a: any, b: any): boolean => {
   }
   const TYPE_METHODS_MAP = {
     array: (x: any[], y: any[]): boolean => {
+      if (x === y) {
+        return true;
+      }
       if (x.length !== y.length) { return false; }
       const ifEqual = (pre: any[], nex: any[]): boolean => {
         const compareFirst = isCongruence(pre[0], nex[0]);
@@ -181,9 +183,15 @@ export const isCongruence = (a: any, b: any): boolean => {
       return ifEqual(x, y);
     },
     function: (x: () => any, y: () => any): boolean => {
+      if (x === y) {
+        return true;
+      }
       return String(x) === String(y);
     },
     object: (x: { [key: string]: any }, y: { [key: string]: any }) => {
+      if (x === y) {
+        return true;
+      }
       const xKeys = Object.keys(x);
       const yKeys = Object.keys(y);
       if (xKeys.length !== yKeys.length) {
@@ -252,4 +260,24 @@ export const fragment = <T>(gap: number, func: (val: List<T>, index: number) => 
     return fragmentI(sumArr, index + 1, gapN, fun, li.slice(gapN));
   };
   return fragmentI([], 0, gap, func, list);
+};
+
+/**
+ * A function return the deduplicated value
+ * 
+ * @param list 
+ */
+export const deduplicate = <T>(list: List<T>): List<T> => {
+  if (!list.length) {
+    return [];
+  }
+  const deduplicateI = (sumArr: List<T>, li: List<T>): List<T> => {
+    const filtedArr = filter(v => !isCongruence(li[0], v), li.slice(1));
+    const arr = sumArr.concat(li[0]);
+    if (li.length <= 1) {
+      return arr;
+    }
+    return deduplicateI(arr, filtedArr);
+  };
+  return deduplicateI([], list);
 };

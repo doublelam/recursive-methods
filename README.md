@@ -100,7 +100,7 @@ Compare the two values, return false or true
 ```
 
 ### .reverse(list)
-Return a serversed list
+Return a reversed list
 ``` js
 .reverse([1, 2, 3, 4, 5, 6]);
 // return [6, 5, 4, 3, 2, 1]
@@ -114,11 +114,22 @@ The difference between function map and this function is that this function do n
   3, 
   (v, i) => (v[0] || 0) + (v[1] || 0) + (v[2] || 0),
   [1, 2, 3, 4, 5, 6, 7, 8]
-);
+);1
 // return [6, 15, 15]
 
 .fragment(3, (v, i) => v, [22, 33, 44, 55, 66, 77, 88, 99, 12, 12, 124]);
 // return [[22, 33, 44], [55, 66, 77], [88, 99, 12], [12, 124]]
+```
+
+### .deduplicate(list)
+Return a list which is deduplicated
+``` js
+.deduplicate([1,2,3,4,4,4,2,2,2,5,5,1,2,3,6]);
+// return [1,2,3,4,5,6]
+.deduplicate(['aa','bb','cc','cc','cc','dd']);
+// return ['aa','bb','cc','dd']
+.deduplicate([{a: 2,b: 2}, {a: 3,b: 3}, {a: 2,b: 2}, {a: 4,b: 4}]);
+// return [{a: 2,b: 2}, {a: 3,b: 3}, {a: 4,b: 4}]
 ```
 
 ## Author

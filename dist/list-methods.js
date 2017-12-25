@@ -161,6 +161,9 @@ exports.isCongruence = function (a, b) {
     }
     var TYPE_METHODS_MAP = {
         array: function (x, y) {
+            if (x === y) {
+                return true;
+            }
             if (x.length !== y.length) {
                 return false;
             }
@@ -174,9 +177,15 @@ exports.isCongruence = function (a, b) {
             return ifEqual(x, y);
         },
         function: function (x, y) {
+            if (x === y) {
+                return true;
+            }
             return String(x) === String(y);
         },
         object: function (x, y) {
+            if (x === y) {
+                return true;
+            }
             var xKeys = Object.keys(x);
             var yKeys = Object.keys(y);
             if (xKeys.length !== yKeys.length) {
@@ -243,5 +252,24 @@ exports.fragment = function (gap, func, list) {
         return fragmentI(sumArr, index + 1, gapN, fun, li.slice(gapN));
     };
     return fragmentI([], 0, gap, func, list);
+};
+/**
+ * A function return the deduplicated value
+ *
+ * @param list
+ */
+exports.deduplicate = function (list) {
+    if (!list.length) {
+        return [];
+    }
+    var deduplicateI = function (sumArr, li) {
+        var filtedArr = exports.filter(function (v) { return !exports.isCongruence(li[0], v); }, li.slice(1));
+        var arr = sumArr.concat(li[0]);
+        if (li.length <= 1) {
+            return arr;
+        }
+        return deduplicateI(arr, filtedArr);
+    };
+    return deduplicateI([], list);
 };
 //# sourceMappingURL=list-methods.js.map

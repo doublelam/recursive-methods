@@ -335,4 +335,55 @@ describe('Recursive Methods', () => {
     }
   });
 
+  describe('Deduplicate', () => {
+    let ded = methods.deduplicate;
+    for (let v of [{
+        input: [
+          ['33', '55', '66', '88', '88', '33', '44']
+        ],
+        output: ['33', '55', '66', '88', '44']
+      }, {
+        input: [
+          [2, 3, 4, 3, 2, 4, 5, 4, 4, 3, 2, 10]
+        ],
+        output: [2, 3, 4, 5, 10]
+      }, {
+        input: [
+          [{
+            a: 2,
+            b: 2
+          }, {
+            a: 3,
+            b: 3
+          }, {
+            a: 2,
+            b: 2
+          }, {
+            a: 4,
+            b: 4
+          }]
+        ],
+        output: [{
+          a: 2,
+          b: 2
+        }, {
+          a: 3,
+          b: 3
+        }, {
+          a: 4,
+          b: 4
+        }]
+      }, {
+        input: [
+          []
+        ],
+        output: []
+      }]) {
+      it(`when input is [${v.input[0]}], should return [${v.output}]`, () => {
+        // assert.equal(fi(v => v > 3, [1, 2, 3, 4, 5, 6]), [4, 5, 6])
+        expect(ded(...v.input)).to.deep.equal(v.output);
+      })
+    }
+  })
+
 })

@@ -74,3 +74,9 @@ export declare const reverse: <T>(list: T[]) => T[];
  * @param list
  */
 export declare const fragment: <T>(gap: number, func: (val: T[], index: number) => any, list: T[]) => any[];
+/**
+ * A function return the deduplicated value
+ *
+ * @param list
+ */
+export declare const deduplicate: <T>(list: T[]) => T[];

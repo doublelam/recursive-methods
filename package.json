@@ -1,33 +1,26 @@
 {
   "name": "recursive-methods",
   "version": "1.0.8",
-  "description": "A module with several recursive methods",
+  "description": "A good way to learn functional programming in javascript, Inside the functions, there are no any keywords such as \"function\", \"let\", \"var\", \"for\",\"while\", etc.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "tsc": "tsc",
     "ntsc": "ntsc",
     "ntscw": "ntsc --watch",
-    "watch": "webpack --watch",
-    "build": "webpack",
     "test": "mocha test/index.js"
   },
-  "keywords": [
-    "ts",
-    "recursion",
-    "js"
-  ],
+  "keywords": ["ts", "recursion", "js", "functional programming"],
   "author": "lam",
   "license": "ISC",
   "devDependencies": {
     "ntypescript": "^1.201706190042.1",
-    "ts-loader": "^3.2.0",
     "tsc": "^1.20150623.0",
     "typescript": "^2.6.2",
-    "webpack": "^3.10.0"
-  },
-  "dependencies": {
     "chai": "^4.1.2",
     "mocha": "^4.0.1"
+  },
+  "dependencies": {
+    
   }
 }

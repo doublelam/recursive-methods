@@ -1,6 +1,6 @@
 {
   "name": "recursive-methods",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A good way to learn functional programming in javascript, Inside the functions, there are no any keywords such as \"function\", \"let\", \"var\", \"for\",\"while\", etc.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

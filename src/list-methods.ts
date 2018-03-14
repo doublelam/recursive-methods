@@ -61,6 +61,32 @@ export const extreme = <T>(func: (a: T, b: T) => boolean, list: List<T>): T => {
  * @param func 
  * @param list 
  */
+export const extremeWithRest = <T>(func: (a: T, b: T) => boolean, list: List<T>): {
+  0: T;
+  1: T[];
+  length: 2;
+} => {
+  const extremeWithRestI = (ext: T, rest: T[], fun: (a: T, b: T) => boolean, arr: List<T>): {
+    0: T;
+    1: T[];
+    length: 2;
+  } => {
+    if (!arr.length) {
+      return [ext, rest];
+    }
+    const [newExt, newRest] = func(arr[0], ext) ?
+      [ext, rest.concat(arr[0])] :
+      [arr[0], rest.concat(ext)];
+    return extremeWithRestI(newExt, newRest, fun, arr.slice(1));
+  };
+  return extremeWithRestI(list[0], [], func, list.slice(1));
+};
+
+/**
+ * 
+ * @param func 
+ * @param list 
+ */
 export const whileis = <T>(func: (v: T) => boolean, list: List<T>): List<T> => {
   const whileisI = (sumArr: List<T>, fun: (v: T) => boolean, li: List<T>) => {
     if (!fun(li[0]) || li.length <= 0) {
@@ -100,14 +126,12 @@ export const sorter = <T>(func: (a: T, b: T) => boolean, list: List<T>): List<T>
     return [];
   }
   const sorterI = (sumArr: List<T>, fun: (a: T, b: T) => boolean, li: List<T>) => {
-    const extremeVal = extreme((a, b) => !fun(a, b), li);
-    const val = sumArr.concat([extremeVal]);
+    const extremeVals = extremeWithRest((a, b) => fun(a, b), li);
+    const val = sumArr.concat([extremeVals[0]]);
     if (li.length <= 1) {
       return val;
     }
-    return sorterI(val,
-      fun,
-      drop(v => v === extremeVal, li));
+    return sorterI(val, fun, extremeVals[1]);
   };
   return sorterI([], func, list);
 };

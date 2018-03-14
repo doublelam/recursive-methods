@@ -384,6 +384,19 @@ describe('Recursive Methods', () => {
         expect(ded(...v.input)).to.deep.equal(v.output);
       })
     }
-  })
+  });
 
+  describe('ExtremeWithRest', () => {
+    const extWR = methods.extremeWithRest;
+    for (let v of [
+      {input: [(a, b) => a > b, [1,2,3,4,5]], output: [1, [2,3,4,5]]},
+      {input: [(a, b) => a < b, [1,2,3,4,5]], output: [5, [1,2,3,4]]},
+      {input: [(a, b) => a < b, [11, 44, 10, 55,2]], output: [55, [11,10,44,2]]},
+      {input: [(a, b) => a > b, [56,33,3,778,234]], output: [3, [56, 33, 778, 234]]},
+    ]) {
+      it(`when input is ${v.input}`, () => {
+        expect(extWR(...v.input)).to.deep.equal(v.output)
+      })
+    }
+  })
 })

@@ -26,6 +26,16 @@ export declare const extreme: <T>(func: (a: T, b: T) => boolean, list: T[]) => T
  * @param func
  * @param list
  */
+export declare const extremeWithRest: <T>(func: (a: T, b: T) => boolean, list: T[]) => {
+    0: T;
+    1: T[];
+    length: 2;
+};
+/**
+ *
+ * @param func
+ * @param list
+ */
 export declare const whileis: <T>(func: (v: T) => boolean, list: T[]) => T[];
 /**
  *

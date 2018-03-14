@@ -60,6 +60,23 @@ exports.extreme = function (func, list) {
  * @param func
  * @param list
  */
+exports.extremeWithRest = function (func, list) {
+    var extremeWithRestI = function (ext, rest, fun, arr) {
+        if (!arr.length) {
+            return [ext, rest];
+        }
+        var _a = func(arr[0], ext) ?
+            [ext, rest.concat(arr[0])] :
+            [arr[0], rest.concat(ext)], newExt = _a[0], newRest = _a[1];
+        return extremeWithRestI(newExt, newRest, fun, arr.slice(1));
+    };
+    return extremeWithRestI(list[0], [], func, list.slice(1));
+};
+/**
+ *
+ * @param func
+ * @param list
+ */
 exports.whileis = function (func, list) {
     var whileisI = function (sumArr, fun, li) {
         if (!fun(li[0]) || li.length <= 0) {
@@ -97,12 +114,12 @@ exports.sorter = function (func, list) {
         return [];
     }
     var sorterI = function (sumArr, fun, li) {
-        var extremeVal = exports.extreme(function (a, b) { return !fun(a, b); }, li);
-        var val = sumArr.concat([extremeVal]);
+        var extremeVals = exports.extremeWithRest(function (a, b) { return fun(a, b); }, li);
+        var val = sumArr.concat([extremeVals[0]]);
         if (li.length <= 1) {
             return val;
         }
-        return sorterI(val, fun, exports.drop(function (v) { return v === extremeVal; }, li));
+        return sorterI(val, fun, extremeVals[1]);
     };
     return sorterI([], func, list);
 };

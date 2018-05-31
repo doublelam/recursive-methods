@@ -155,7 +155,7 @@ exports.getType = function (param) {
         return "date";
     }
     if (param === null) {
-        return null;
+        return "null";
     }
     if (param instanceof RegExp) {
         return "regExp";
@@ -221,7 +221,7 @@ exports.isCongruence = function (a, b) {
             };
             return ifKeysEqual && ifEqual(xKeys);
         },
-        otherwise: function (x, y) { return a === b; },
+        otherwise: function (x, y) { return x === y; },
     };
     return (TYPE_METHODS_MAP[typeFirst] || TYPE_METHODS_MAP.otherwise)(a, b);
 };

@@ -169,7 +169,7 @@ export const getType = (param: any): DataType => {
     return "date";
   }
   if (param === null) {
-    return null;
+    return "null";
   }
   if (param instanceof RegExp) {
     return "regExp";
@@ -234,7 +234,7 @@ export const isCongruence = (a: any, b: any): boolean => {
       };
       return ifKeysEqual && ifEqual(xKeys);
     },
-    otherwise: (x: any, y: any): boolean => a === b,
+    otherwise: (x: any, y: any): boolean => x === y,
   };
   return (TYPE_METHODS_MAP[typeFirst] || TYPE_METHODS_MAP.otherwise)(a, b);
 };

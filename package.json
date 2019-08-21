@@ -1,6 +1,6 @@
 {
   "name": "recursive-methods",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "A good way to learn functional programming in javascript, Inside the functions, there are no any keywords such as \"function\", \"let\", \"var\", \"for\",\"while\", etc.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,6 +26,10 @@
     "tsc": "^1.20150623.0",
     "tslint": "^5.9.1",
     "typescript": "^2.7.2"
+  },
+  "repository": {
+    "type" : "git",
+    "url": "ssh://git@github.com:doublelam/recursive-methods.git"
   },
   "dependencies": {}
 }

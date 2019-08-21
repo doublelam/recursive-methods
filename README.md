@@ -131,6 +131,22 @@ Return a list which is deduplicated
 .deduplicate([{a: 2,b: 2}, {a: 3,b: 3}, {a: 2,b: 2}, {a: 4,b: 4}]);
 // return [{a: 2,b: 2}, {a: 3,b: 3}, {a: 4,b: 4}]
 ```
+### .regenerateMatrix(matrix)
+matrix is an array like 
+```js
+[[1,2,3],[4,5,6],[7,8,9]]
+```
+pick the column values as the new matrix's raw values
+```js
+.regenerateMatrix([['1','2',3],['4','5',6],['7','8',9]])
+// return [['1','4','7'], ['2','5','8'],[3,6,9]]
+```
+### .rotateMatrix(matrix)
+rotate a matrix 90 degrees as anti-clockwise
+```js
+.rotateMatrix([['1','2',3],['4','5',6],['7','8',9]])
+// return [[3,6,9],['2','5','8'],['1','4','7']]
+```
 
 ## Author
 [lam](https://github.com/doublelam)

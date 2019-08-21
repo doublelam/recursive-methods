@@ -398,5 +398,34 @@ describe('Recursive Methods', () => {
         expect(extWR(...v.input)).to.deep.equal(v.output)
       })
     }
+  });
+
+  describe('regenerateMatrix', () => {
+    const regenerateMatrix = methods.regenerateMatrix;
+    for (let v of [
+      {input: [['1','2',3],['4','5',6],['7','8',9]], output: [['1','4','7'], ['2','5','8'],[3,6,9]]},
+      {input: [[1,2,3],[4,5,6],[7,8,9]], output: [[1,4,7], [2,5,8],[3,6,9]]},
+      {input: [[1,2,3,4],[5,6,7,8]], output: [[1,5],[2,6],[3,7],[4,8]]},
+      {input: [[1,2,3],[4,5,6],[7,8,9],[10,11,12]], output: [[1,4,7,10], [2,5,8,11],[3,6,9,12]]}
+    ]) {
+      it(`when input is ${JSON.stringify(v.input)}`, () => {
+        expect(regenerateMatrix(v.input)).to.deep.equal(v.output)
+      })
+    }
   })
+})
+
+describe('rotateMatrix', () => {
+  const rotateMatrix = methods.rotateMatrix;
+  for (let v of [
+    {input: [['1','2',3],['4','5',6],['7','8',9]], output: [[3,6,9],['2','5','8'],['1','4','7']]},
+    {input: [[1,2,3],[4,5,6],[7,8,9]], output: [[3,6,9],[2,5,8],[1,4,7]]},
+    {input: [[1,2,3,4],[5,6,7,8]], output: [[4,8],[3,7],[2,6],[1,5]]},
+    {input: [[1,2,3],[4,5,6],[7,8,9],[10,11,12]], output: [[3,6,9,12],[2,5,8,11],[1,4,7,10]]}
+  ]) {
+    it(`when input is ${JSON.stringify(v.input)}`, () => {
+      expect(rotateMatrix(v.input)).to.deep.equal(v.output)
+    })
+  }
+
 })

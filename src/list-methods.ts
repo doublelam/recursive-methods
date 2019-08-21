@@ -1,4 +1,4 @@
-import { DataType, List } from "./types/types";
+import { List, DataType } from "./types/types";
 /**
  * 
  * @param func 
@@ -61,16 +61,8 @@ export const extreme = <T>(func: (a: T, b: T) => boolean, list: List<T>): T => {
  * @param func 
  * @param list 
  */
-export const extremeWithRest = <T>(func: (a: T, b: T) => boolean, list: List<T>): {
-  0: T;
-  1: T[];
-  length: 2;
-} => {
-  const extremeWithRestI = (ext: T, rest: T[], fun: (a: T, b: T) => boolean, arr: List<T>): {
-    0: T;
-    1: T[];
-    length: 2;
-  } => {
+export const extremeWithRest = <T>(func: (a: T, b: T) => boolean, list: List<T>): [T, T[]] => {
+  const extremeWithRestI = (ext: T, rest: T[], fun: (a: T, b: T) => boolean, arr: List<T>): [T, T[]] => {
     if (!arr.length) {
       return [ext, rest];
     }

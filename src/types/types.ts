@@ -12,4 +12,7 @@ export type DataType =
   "regExp" |
   "error" |
   "date" |
-  "symbol";
+  "symbol"|
+  "bigint";
+
+export type Matrix<T = any> = T[][];

@@ -1,14 +1,14 @@
 {
   "name": "recursive-methods",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "A good way to learn functional programming in javascript, Inside the functions, there are no any keywords such as \"function\", \"let\", \"var\", \"for\",\"while\", etc.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "tsc": "tsc",
-    "tscw": "tsc --watch",
+    "tscw": "tsc -w",
     "ntsc": "ntsc",
-    "ntscw": "ntsc --watch",
+    "ntscw": "ntsc -w",
     "test": "mocha test/index.js"
   },
   "keywords": [

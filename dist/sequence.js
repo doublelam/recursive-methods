@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var list_methods_1 = require("./list-methods");
 /**
  * A negeric function
  *
@@ -31,5 +32,30 @@ exports.fibonacciArr = function (n) {
         return fibonacciArrI(sumArr.concat(temSum), afterward, temSum, num - 1);
     };
     return fibonacciArrI([1], 0, 1, n);
+};
+/**
+ * regenerate a matrix, [[1,2,3],[4,5,6],[7,8,9]] --> [[1,4,7],[2,5,8],[3,6,9]]
+ *
+ * @param matrix an array with same length arrays
+ * @returns returns new matrix
+ */
+exports.regenerateMatrix = function (matrix) {
+    var IRegenerateMatrix = function (r, m) {
+        if (!m[0].length) {
+            return r;
+        }
+        var newRow = r.concat([m.map(function (v) { return v[0]; })]);
+        return IRegenerateMatrix(newRow, m.map(function (v) { return v.slice(1); }));
+    };
+    return IRegenerateMatrix([], matrix);
+};
+/**
+ * rotate a matrix, [[1,2,3],[4,5,6],[7,8,9]] --> [[3,6,9],[2,5,8],[1,4,7]]
+ *
+ * @param matrix an array with same length arrays
+ * @returns returns new matrix
+ */
+exports.rotateMatrix = function (matrix) {
+    return list_methods_1.reverse(exports.regenerateMatrix(matrix));
 };
 //# sourceMappingURL=sequence.js.map

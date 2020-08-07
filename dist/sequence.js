@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var list_methods_1 = require("./list-methods");
 /**
- * A negeric function
+ * A fibonacci generator function
  *
  * @param n paramter of function, start from 0
  * @returns returns a number of fibonacci number
@@ -18,7 +18,7 @@ exports.fibonacci = function (n) {
     return fibonacciI(0, 1, n);
 };
 /**
- * Fibonacci function which returns fibonacci consequence
+ * Returns a fibonacci sequence
  *
  * @param n parameter of function, start from 0
  * @returns returns a sequence of fibonacci numbers
@@ -34,10 +34,10 @@ exports.fibonacciArr = function (n) {
     return fibonacciArrI([1], 0, 1, n);
 };
 /**
- * regenerate a matrix, [[1,2,3],[4,5,6],[7,8,9]] --> [[1,4,7],[2,5,8],[3,6,9]]
+ * Regenerate a matrix, e.g. [[1,2,3],[4,5,6],[7,8,9]] --> [[1,4,7],[2,5,8],[3,6,9]]
  *
  * @param matrix an array with same length arrays
- * @returns returns new matrix
+ * @returns returns a new matrix
  */
 exports.regenerateMatrix = function (matrix) {
     var IRegenerateMatrix = function (r, m) {
@@ -50,7 +50,7 @@ exports.regenerateMatrix = function (matrix) {
     return IRegenerateMatrix([], matrix);
 };
 /**
- * rotate a matrix, [[1,2,3],[4,5,6],[7,8,9]] --> [[3,6,9],[2,5,8],[1,4,7]]
+ * Rotate a matrix, [[1,2,3],[4,5,6],[7,8,9]] --> [[3,6,9],[2,5,8],[1,4,7]]
  *
  * @param matrix an array with same length arrays
  * @returns returns new matrix

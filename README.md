@@ -114,7 +114,7 @@ The difference between function map and this function is that this function do n
   3, 
   (v, i) => (v[0] || 0) + (v[1] || 0) + (v[2] || 0),
   [1, 2, 3, 4, 5, 6, 7, 8]
-);1
+);
 // return [6, 15, 15]
 
 .fragment(3, (v, i) => v, [22, 33, 44, 55, 66, 77, 88, 99, 12, 12, 124]);
@@ -122,7 +122,7 @@ The difference between function map and this function is that this function do n
 ```
 
 ### .deduplicate(list)
-Return a list which is deduplicated
+Return a list which is deleted duplicated values
 ``` js
 .deduplicate([1,2,3,4,4,4,2,2,2,5,5,1,2,3,6]);
 // return [1,2,3,4,5,6]
@@ -136,7 +136,7 @@ matrix is an array like
 ```js
 [[1,2,3],[4,5,6],[7,8,9]]
 ```
-pick the column values as the new matrix's raw values
+pick the column values as the new matrix's row values
 ```js
 .regenerateMatrix([['1','2',3],['4','5',6],['7','8',9]])
 // return [['1','4','7'], ['2','5','8'],[3,6,9]]

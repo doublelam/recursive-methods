@@ -1,4 +1,7 @@
-import { List, DataType } from "./types/types";
+import {
+  DataType,
+  List,
+} from "./types/types";
 /**
  * 
  * @param func 

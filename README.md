@@ -1,4 +1,4 @@
-# Get starting
+# Getting started
 This package includes several recursive methods. The functions of them are as same as the JS native methods such as Array.sort, Array.map. The difference between the native methods and these methods is that these methods are recursive methods and with trail optimization, never worry about memory out, after using async and await, JS implements the trail optimization very well.
 e.g. 
 ```ts
@@ -7,7 +7,7 @@ export const extreme = async <T>(func: (a: T, b: T) => boolean, list: List<T>): 
     return list[0];
   }
   const extremeI = async (fun: (a: T, b: T) => boolean, li: List<T>, max: T): Promise<T> => {
-    await 0;
+    await null;
     const temMax = fun(max, li[0]) ? max : li[0];
     if (li.length <= 1) {
       return temMax;
@@ -27,7 +27,7 @@ const arr = new Array(1000000).fill(0).map(() => Math.random());
 ```
 
 
-## Install
+## Installation
 ```
 npm install recursive-methods --save
 ```
@@ -36,9 +36,10 @@ npm install recursive-methods --save
 javascript
 ``` js
 const recursiveMethods = require('recursive-methods');
-
-const greatest = recursiveMethods.extreme((a, b) => a > b,[1, 2, 3, 4, 5, 6, 7, 8]);
-console.log(greatest);
+(async () => {
+  const greatest = await recursiveMethods.extreme((a, b) => a > b,[1, 2, 3, 4, 5, 6, 7, 8]);
+  console.log(greatest);
+})();
 // 8
 ```
 
@@ -46,22 +47,24 @@ typescript
 ``` ts
 import { map } from 'recursive-methods';
 const list = ['one', 'two', 'three', 'four', 'five'];
-const newList = map((v, i) => v + String(i), lists);
-console.log(newList);
+(async () => {
+  const newList = await map((v, i) => v + String(i), lists);
+  console.log(newList);
+})();
 // ['one0', 'two1', 'three2', 'four3', 'five4']
 ```
 ## Methods
 ### .fibonacci(n)
 Return a fibonacci number
 ``` js
-.finonacci(0); .fibonacci(1); .fibonacci(2);
+.fibonacci(0); .fibonacci(1); .fibonacci(2);
 // Individually return 1; 1; 2;
 ```
 
 ### .fibonacciArr(n)
 Return a fibonacci list
 ``` js
-.finonacciArr(0); .fibonacciArr(1); .fibonacciArr(2);
+.fibonacciArr(0); .fibonacciArr(1); .fibonacciArr(2);
 // Individually return [1]; [1, 1]; [1, 1, 2];
 ```
 
@@ -73,7 +76,7 @@ Return a filtered list
 ```
 
 ### .sort(func, list)
-Return a sorted list
+Return a sorted list(it's faster a bit)
 ``` js
 .sort((a, b) => a > b, [1,4,5,2,8,2,4,6]);
 // return [1,2,2,4,4,5,6,8]
@@ -173,10 +176,4 @@ rotate a matrix 90 degrees as anti-clockwise
 .rotateMatrix([['1','2',3],['4','5',6],['7','8',9]])
 // return [[3,6,9],['2','5','8'],['1','4','7']]
 ```
-
-## Author
-[lam](https://github.com/doublelam)
-
-## Project on Github
-[The project address on github](https://github.com/doublelam/recursive-methods)
 

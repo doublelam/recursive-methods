@@ -1,5 +1,31 @@
 # Get starting
-This package includes several recursive methods. The functions of them are as same as the js native methods such as Array.sort, Array.map. The difference of them is that these methods are recursive methods and with trail optimization, so be caution that sometimes you may encounter the exception of stack overflow, because js does not support trail optimization. 
+This package includes several recursive methods. The functions of them are as same as the JS native methods such as Array.sort, Array.map. The difference between the native methods and these methods is that these methods are recursive methods and with trail optimization, never worry about memory out, after using async and await, JS implements the trail optimization very well.
+e.g. 
+```ts
+export const extreme = async <T>(func: (a: T, b: T) => boolean, list: List<T>): Promise<T> => {
+  if (list.length <= 1) {
+    return list[0];
+  }
+  const extremeI = async (fun: (a: T, b: T) => boolean, li: List<T>, max: T): Promise<T> => {
+    await 0;
+    const temMax = fun(max, li[0]) ? max : li[0];
+    if (li.length <= 1) {
+      return temMax;
+    }
+    return extremeI(fun, li.slice(1), temMax);
+  };
+  return extremeI(func, list.slice(1), list[0]);
+};
+
+const arr = new Array(1000000).fill(0).map(() => Math.random());
+(async () => {   
+    console.time('s')
+    console.log(await methods.extreme((a, b) => a > b,arr))
+    console.timeEnd('s')
+})()
+// Even though the array length is over 1,000,000, it still works, it just takes time, it doesn't take memory
+```
+
 
 ## Install
 ```

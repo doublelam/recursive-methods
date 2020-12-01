@@ -7,8 +7,8 @@ import { Matrix } from "./types/types";
  * @param n paramter of function, start from 0
  * @returns returns a number of fibonacci number
  */
-export const fibonacci = (n: number): number => {
-  const fibonacciI = (forward: number, afterward: number, num: number): number => {
+export const fibonacci = async (n: number): Promise<number> => {
+  const fibonacciI = async (forward: number, afterward: number, num: number): Promise<number> => {
     const temSum = forward + afterward;
     if (num <= 0) {
       return afterward;
@@ -24,8 +24,13 @@ export const fibonacci = (n: number): number => {
  * @param n parameter of function, start from 0
  * @returns returns a sequence of fibonacci numbers
  */
-export const fibonacciArr = (n: number): number[] => {
-  const fibonacciArrI = (sumArr: number[], forward: number, afterward: number, num: number): number[] => {
+export const fibonacciArr = async (n: number): Promise<number[]> => {
+  const fibonacciArrI = async (
+    sumArr: number[],
+    forward: number,
+    afterward: number,
+    num: number,
+  ): Promise<number[]> => {
     const temSum = forward + afterward;
     if (num <= 0) {
       return sumArr;
@@ -41,8 +46,9 @@ export const fibonacciArr = (n: number): number[] => {
  * @param matrix an array with same length arrays
  * @returns returns a new matrix
  */
-export const regenerateMatrix = (matrix: Matrix): Matrix => {
-  const IRegenerateMatrix = (r: Matrix, m: Matrix) => {
+export const regenerateMatrix = async (matrix: Matrix): Promise<Matrix> => {
+  const IRegenerateMatrix = async (r: Matrix, m: Matrix) => {
+    await null;
     if (!m[0].length) {
       return r;
     }
@@ -58,6 +64,6 @@ export const regenerateMatrix = (matrix: Matrix): Matrix => {
  * @param matrix an array with same length arrays
  * @returns returns new matrix
  */
-export const rotateMatrix = (matrix: Matrix): Matrix => {
-  return reverse(regenerateMatrix(matrix));
+export const rotateMatrix = async (matrix: Matrix): Promise<Matrix> => {
+  return reverse(await regenerateMatrix(matrix));
 };

@@ -1,11 +1,11 @@
-import { DataType } from "./types/types";
+import { DataType, List } from "./types/types";
 /**
  *
  * @param func
  * @param list
  * @returns
  */
-export declare const filter: <T>(func: (v: T) => boolean, list: T[]) => T[];
+export declare const filter: <T>(func: (v: T) => boolean, list: List<T>) => Promise<List<T>>;
 /**
  *
  * This method is without trail optimization
@@ -13,44 +13,44 @@ export declare const filter: <T>(func: (v: T) => boolean, list: T[]) => T[];
  * @param list
  * @returns return array or string
  */
-export declare const sort: <T>(func: (a: T, b: T) => boolean, list: T[]) => T[];
+export declare const sort: <T>(func: (a: T, b: T) => boolean, list: List<T>) => Promise<List<T>>;
 /**
  *
  * @param func function is uesed to judge the value
  * @param list the list of input
  * @returns returns an element
  */
-export declare const extreme: <T>(func: (a: T, b: T) => boolean, list: T[]) => T;
+export declare const extreme: <T>(func: (a: T, b: T) => boolean, list: List<T>) => Promise<T>;
 /**
  *
  * @param func
  * @param list
  */
-export declare const extremeWithRest: <T>(func: (a: T, b: T) => boolean, list: T[]) => [T, T[]];
+export declare const extremeWithRest: <T>(func: (a: T, b: T) => boolean, list: List<T>) => Promise<[T, T[]]>;
 /**
  *
  * @param func
  * @param list
  */
-export declare const whileis: <T>(func: (v: T) => boolean, list: T[]) => T[];
+export declare const whileis: <T>(func: (v: T) => boolean, list: List<T>) => Promise<List<T>>;
 /**
  *
  * @param func
  * @param list
  */
-export declare const drop: <T>(func: (v: T) => boolean, list: T[]) => T[];
+export declare const drop: <T>(func: (v: T) => boolean, list: List<T>) => Promise<List<T>>;
 /**
  *
  * @param func
  * @param list
  */
-export declare const sorter: <T>(func: (a: T, b: T) => boolean, list: T[]) => T[];
+export declare const sorter: <T>(func: (a: T, b: T) => boolean, list: List<T>) => Promise<List<T>>;
 /**
  *
  * @param func
  * @param list
  */
-export declare const map: <T>(func: (val: T, index: number) => any, list: T[]) => any[];
+export declare const map: <T, U>(func: (val: T, index: number) => U, list: List<T>) => Promise<U[]>;
 /**
  * A function that get the type of the input
  *
@@ -71,7 +71,7 @@ export declare const isCongruence: (a: any, b: any) => boolean;
  * @param list list
  * @returns return a list
  */
-export declare const reverse: <T>(list: T[]) => T[];
+export declare const reverse: <T>(list: List<T>) => Promise<List<T>>;
 /**
  * A function
  *
@@ -79,10 +79,10 @@ export declare const reverse: <T>(list: T[]) => T[];
  * @param func
  * @param list
  */
-export declare const fragment: <T>(gap: number, func: (val: T[], index: number) => any, list: T[]) => any[];
+export declare const fragment: <T, U>(gap: number, func: (val: List<T>, index: number) => U, list: List<T>) => Promise<U[]>;
 /**
  * A function return the deduplicated value
  *
  * @param list
  */
-export declare const deduplicate: <T>(list: T[]) => T[];
+export declare const deduplicate: <T>(list: List<T>) => Promise<List<T>>;

@@ -8,8 +8,9 @@ import {
  * @param list 
  * @returns 
  */
-export const filter = <T>(func: (v: T) => boolean, list: List<T>): List<T> => {
-  const filterI = (rsl: List<T>, fun: (v: T) => boolean, li: List<T>): List<T> => {
+export const filter = <T>(func: (v: T) => boolean, list: List<T>): Promise<List<T>> => {
+  const filterI = async (rsl: List<T>, fun: (v: T) => boolean, li: List<T>): Promise<List<T>> => {
+    await null;
     const eles = rsl.concat(fun(li[0]) ? [li[0]] : []);
     if (li.length <= 1) {
       return eles;
@@ -26,15 +27,14 @@ export const filter = <T>(func: (v: T) => boolean, list: List<T>): List<T> => {
  * @param list
  * @returns return array or string
  */
-export const sort = <T>(func: (a: T, b: T) => boolean, list: List<T>): List<T> => {
+export const sort = async <T>(func: (a: T, b: T) => boolean, list: List<T>): Promise<List<T>> => {
   if (list.length <= 1) {
     return list;
   }
   const midVal = list[0];
-  const leftVals = sort(func, filter(v =>
+  const leftVals = await sort(func, await filter(v =>
     func(list[0], v), list.slice(1)));
-
-  const rightVals = sort(func, filter(v =>
+  const rightVals = await sort(func, await filter(v =>
     !func(list[0], v), list.slice(1)));
   return leftVals.concat([midVal]).concat(rightVals);
 };
@@ -45,11 +45,12 @@ export const sort = <T>(func: (a: T, b: T) => boolean, list: List<T>): List<T> =
  * @param list the list of input
  * @returns returns an element
  */
-export const extreme = <T>(func: (a: T, b: T) => boolean, list: List<T>): T => {
+export const extreme = async <T>(func: (a: T, b: T) => boolean, list: List<T>): Promise<T> => {
   if (list.length <= 1) {
     return list[0];
   }
-  const extremeI = (fun: (a: T, b: T) => boolean, li: List<T>, max: T): T => {
+  const extremeI = async (fun: (a: T, b: T) => boolean, li: List<T>, max: T): Promise<T> => {
+    await null;
     const temMax = fun(max, li[0]) ? max : li[0];
     if (li.length <= 1) {
       return temMax;
@@ -64,8 +65,9 @@ export const extreme = <T>(func: (a: T, b: T) => boolean, list: List<T>): T => {
  * @param func 
  * @param list 
  */
-export const extremeWithRest = <T>(func: (a: T, b: T) => boolean, list: List<T>): [T, T[]] => {
-  const extremeWithRestI = (ext: T, rest: T[], fun: (a: T, b: T) => boolean, arr: List<T>): [T, T[]] => {
+export const extremeWithRest = async <T>(func: (a: T, b: T) => boolean, list: List<T>): Promise<[T, T[]]> => {
+  const extremeWithRestI = async (ext: T, rest: T[], fun: (a: T, b: T) => boolean, arr: List<T>): Promise<[T, T[]]> => {
+    await null;
     if (!arr.length) {
       return [ext, rest];
     }
@@ -82,8 +84,9 @@ export const extremeWithRest = <T>(func: (a: T, b: T) => boolean, list: List<T>)
  * @param func 
  * @param list 
  */
-export const whileis = <T>(func: (v: T) => boolean, list: List<T>): List<T> => {
-  const whileisI = (sumArr: List<T>, fun: (v: T) => boolean, li: List<T>) => {
+export const whileis = async <T>(func: (v: T) => boolean, list: List<T>): Promise<List<T>> => {
+  const whileisI = async (sumArr: List<T>, fun: (v: T) => boolean, li: List<T>): Promise<List<T>> => {
+    await null;
     if (!fun(li[0]) || li.length <= 0) {
       return sumArr;
     }
@@ -97,8 +100,9 @@ export const whileis = <T>(func: (v: T) => boolean, list: List<T>): List<T> => {
  * @param func 
  * @param list 
  */
-export const drop = <T>(func: (v: T) => boolean, list: List<T>): List<T> => {
-  const dropI = (sumArr: List<T>, fun: (v: T) => boolean, li: List<T>) => {
+export const drop = async <T>(func: (v: T) => boolean, list: List<T>): Promise<List<T>> => {
+  const dropI = async (sumArr: List<T>, fun: (v: T) => boolean, li: List<T>): Promise<List<T>> => {
+    await null;
     if (!li.length) {
       return sumArr;
     }
@@ -116,12 +120,13 @@ export const drop = <T>(func: (v: T) => boolean, list: List<T>): List<T> => {
  * @param func 
  * @param list 
  */
-export const sorter = <T>(func: (a: T, b: T) => boolean, list: List<T>): List<T> => {
+export const sorter = async <T>(func: (a: T, b: T) => boolean, list: List<T>): Promise<List<T>> => {
   if (!list.length) {
     return [];
   }
-  const sorterI = (sumArr: List<T>, fun: (a: T, b: T) => boolean, li: List<T>) => {
-    const extremeVals = extremeWithRest((a, b) => fun(a, b), li);
+  const sorterI = async (sumArr: List<T>, fun: (a: T, b: T) => boolean, li: List<T>): Promise<List<T>> => {
+    await null;
+    const extremeVals = await extremeWithRest((a, b) => fun(a, b), li);
     const val = sumArr.concat([extremeVals[0]]);
     if (li.length <= 1) {
       return val;
@@ -136,11 +141,12 @@ export const sorter = <T>(func: (a: T, b: T) => boolean, list: List<T>): List<T>
  * @param func 
  * @param list 
  */
-export const map = <T>(func: (val: T, index: number) => any, list: List<T>): any[] => {
+export const map = async <T, U>(func: (val: T, index: number) => U, list: List<T>): Promise<U[]> => {
   if (!list.length) {
     return [];
   }
-  const mapI = (sumArr: any[], index: number, fun: (val: T, index: number) => any, li: List<T>): any[] => {
+  const mapI = async (sumArr: any[], index: number, fun: (val: T, index: number) => U, li: List<T>): Promise<U[]> => {
+    await null;
     const currentEle = sumArr.concat([fun(li[0], index)]);
     if (li.length <= 1) {
       return currentEle;
@@ -240,11 +246,12 @@ export const isCongruence = (a: any, b: any): boolean => {
  * @param list list
  * @returns return a list
  */
-export const reverse = <T>(list: List<T>): List<T> => {
+export const reverse = async <T>(list: List<T>): Promise<List<T>> => {
   if (!list.length) {
     return list;
   }
-  const reverseI = (outputArr: List<T>, li: List<T>): List<T> => {
+  const reverseI = async (outputArr: List<T>, li: List<T>): Promise<List<T>> => {
+    await null;
     const currentEle = [li[0]].concat(outputArr);
     if (li.length <= 1) {
       return currentEle;
@@ -261,7 +268,11 @@ export const reverse = <T>(list: List<T>): List<T> => {
  * @param func 
  * @param list 
  */
-export const fragment = <T>(gap: number, func: (val: List<T>, index: number) => any, list: List<T>): any[] => {
+export const fragment = async <T, U>(
+  gap: number,
+  func: (val: List<T>, index: number) => U,
+  list: List<T>,
+): Promise<U[]> => {
   if (!list.length) {
     return [];
   }
@@ -270,7 +281,13 @@ export const fragment = <T>(gap: number, func: (val: List<T>, index: number) => 
     error.message = "The first parameter should be a positive number";
     throw error;
   }
-  const fragmentI = (arr: any[], index: number, gapN: number, fun: (v: List<T>, i: number) => any, li: List<T>) => {
+  const fragmentI = async (
+    arr: U[],
+    index: number,
+    gapN: number,
+    fun: (v: List<T>, i: number) => U,
+    li: List<T>,
+  ): Promise<U[]> => {
     const frag = fun(li.slice(0, gapN), index);
     const sumArr = arr.concat([frag]);
     if (li.length <= gap) {
@@ -286,12 +303,13 @@ export const fragment = <T>(gap: number, func: (val: List<T>, index: number) => 
  * 
  * @param list 
  */
-export const deduplicate = <T>(list: List<T>): List<T> => {
+export const deduplicate = async <T>(list: List<T>): Promise<List<T>> => {
   if (!list.length) {
     return [];
   }
-  const deduplicateI = (sumArr: List<T>, li: List<T>): List<T> => {
-    const filtedArr = filter(v => !isCongruence(li[0], v), li.slice(1));
+  const deduplicateI = async (sumArr: List<T>, li: List<T>): Promise<List<T>> => {
+    await null;
+    const filtedArr = await filter(v => !isCongruence(li[0], v), li.slice(1));
     const arr = sumArr.concat(li[0]);
     if (li.length <= 1) {
       return arr;

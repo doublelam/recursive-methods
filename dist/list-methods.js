@@ -1,14 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.deduplicate = exports.fragment = exports.reverse = exports.isCongruence = exports.getType = exports.map = exports.sorter = exports.drop = exports.whileis = exports.extremeWithRest = exports.extreme = exports.sort = exports.filter = void 0;
 /**
  *
  * @param func
  * @param list
  * @returns
  */
-exports.filter = function (func, list) {
-    var filterI = function (rsl, fun, li) {
-        var eles = rsl.concat(fun(li[0]) ? [li[0]] : []);
+const filter = (func, list) => {
+    const filterI = async (rsl, fun, li) => {
+        await null;
+        const eles = rsl.concat(fun(li[0]) ? [li[0]] : []);
         if (li.length <= 1) {
             return eles;
         }
@@ -16,6 +18,7 @@ exports.filter = function (func, list) {
     };
     return filterI([], func, list);
 };
+exports.filter = filter;
 /**
  *
  * This method is without trail optimization
@@ -23,31 +26,29 @@ exports.filter = function (func, list) {
  * @param list
  * @returns return array or string
  */
-exports.sort = function (func, list) {
+const sort = async (func, list) => {
     if (list.length <= 1) {
         return list;
     }
-    var midVal = list[0];
-    var leftVals = exports.sort(func, exports.filter(function (v) {
-        return func(list[0], v);
-    }, list.slice(1)));
-    var rightVals = exports.sort(func, exports.filter(function (v) {
-        return !func(list[0], v);
-    }, list.slice(1)));
+    const midVal = list[0];
+    const leftVals = await exports.sort(func, await exports.filter(v => func(list[0], v), list.slice(1)));
+    const rightVals = await exports.sort(func, await exports.filter(v => !func(list[0], v), list.slice(1)));
     return leftVals.concat([midVal]).concat(rightVals);
 };
+exports.sort = sort;
 /**
  *
  * @param func function is uesed to judge the value
  * @param list the list of input
  * @returns returns an element
  */
-exports.extreme = function (func, list) {
+const extreme = async (func, list) => {
     if (list.length <= 1) {
         return list[0];
     }
-    var extremeI = function (fun, li, max) {
-        var temMax = fun(max, li[0]) ? max : li[0];
+    const extremeI = async (fun, li, max) => {
+        await null;
+        const temMax = fun(max, li[0]) ? max : li[0];
         if (li.length <= 1) {
             return temMax;
         }
@@ -55,30 +56,34 @@ exports.extreme = function (func, list) {
     };
     return extremeI(func, list.slice(1), list[0]);
 };
+exports.extreme = extreme;
 /**
  *
  * @param func
  * @param list
  */
-exports.extremeWithRest = function (func, list) {
-    var extremeWithRestI = function (ext, rest, fun, arr) {
+const extremeWithRest = async (func, list) => {
+    const extremeWithRestI = async (ext, rest, fun, arr) => {
+        await null;
         if (!arr.length) {
             return [ext, rest];
         }
-        var _a = func(arr[0], ext) ?
+        const [newExt, newRest] = func(arr[0], ext) ?
             [ext, rest.concat(arr[0])] :
-            [arr[0], rest.concat(ext)], newExt = _a[0], newRest = _a[1];
+            [arr[0], rest.concat(ext)];
         return extremeWithRestI(newExt, newRest, fun, arr.slice(1));
     };
     return extremeWithRestI(list[0], [], func, list.slice(1));
 };
+exports.extremeWithRest = extremeWithRest;
 /**
  *
  * @param func
  * @param list
  */
-exports.whileis = function (func, list) {
-    var whileisI = function (sumArr, fun, li) {
+const whileis = async (func, list) => {
+    const whileisI = async (sumArr, fun, li) => {
+        await null;
         if (!fun(li[0]) || li.length <= 0) {
             return sumArr;
         }
@@ -86,17 +91,19 @@ exports.whileis = function (func, list) {
     };
     return whileisI([], func, list);
 };
+exports.whileis = whileis;
 /**
  *
  * @param func
  * @param list
  */
-exports.drop = function (func, list) {
-    var dropI = function (sumArr, fun, li) {
+const drop = async (func, list) => {
+    const dropI = async (sumArr, fun, li) => {
+        await null;
         if (!li.length) {
             return sumArr;
         }
-        var restVal = li.length <= 1 ? [] : li.slice(1);
+        const restVal = li.length <= 1 ? [] : li.slice(1);
         if (fun(li[0])) {
             return sumArr.concat(restVal);
         }
@@ -104,18 +111,20 @@ exports.drop = function (func, list) {
     };
     return dropI([], func, list);
 };
+exports.drop = drop;
 /**
  *
  * @param func
  * @param list
  */
-exports.sorter = function (func, list) {
+const sorter = async (func, list) => {
     if (!list.length) {
         return [];
     }
-    var sorterI = function (sumArr, fun, li) {
-        var extremeVals = exports.extremeWithRest(function (a, b) { return fun(a, b); }, li);
-        var val = sumArr.concat([extremeVals[0]]);
+    const sorterI = async (sumArr, fun, li) => {
+        await null;
+        const extremeVals = await exports.extremeWithRest((a, b) => fun(a, b), li);
+        const val = sumArr.concat([extremeVals[0]]);
         if (li.length <= 1) {
             return val;
         }
@@ -123,17 +132,19 @@ exports.sorter = function (func, list) {
     };
     return sorterI([], func, list);
 };
+exports.sorter = sorter;
 /**
  *
  * @param func
  * @param list
  */
-exports.map = function (func, list) {
+const map = async (func, list) => {
     if (!list.length) {
         return [];
     }
-    var mapI = function (sumArr, index, fun, li) {
-        var currentEle = sumArr.concat([fun(li[0], index)]);
+    const mapI = async (sumArr, index, fun, li) => {
+        await null;
+        const currentEle = sumArr.concat([fun(li[0], index)]);
         if (li.length <= 1) {
             return currentEle;
         }
@@ -141,13 +152,14 @@ exports.map = function (func, list) {
     };
     return mapI([], 0, func, list);
 };
+exports.map = map;
 /**
  * A function that get the type of the input
  *
  * @param param
  * @return return the type of the input
  */
-exports.getType = function (param) {
+const getType = (param) => {
     if (Array.isArray(param)) {
         return "array";
     }
@@ -165,27 +177,28 @@ exports.getType = function (param) {
     }
     return typeof param;
 };
+exports.getType = getType;
 /**
  * compare if two input values equals
  *
  * @param a First value
  * @param b Second value
  */
-exports.isCongruence = function (a, b) {
-    var typeFirst = exports.getType(a);
+const isCongruence = (a, b) => {
+    const typeFirst = exports.getType(a);
     if (typeFirst !== exports.getType(b)) {
         return false;
     }
-    var TYPE_METHODS_MAP = {
-        array: function (x, y) {
+    const TYPE_METHODS_MAP = {
+        array: (x, y) => {
             if (x === y) {
                 return true;
             }
             if (x.length !== y.length) {
                 return false;
             }
-            var ifEqual = function (pre, nex) {
-                var compareFirst = exports.isCongruence(pre[0], nex[0]);
+            const ifEqual = (pre, nex) => {
+                const compareFirst = exports.isCongruence(pre[0], nex[0]);
                 if (pre.length <= 1) {
                     return compareFirst;
                 }
@@ -193,27 +206,27 @@ exports.isCongruence = function (a, b) {
             };
             return ifEqual(x, y);
         },
-        function: function (x, y) {
+        function: (x, y) => {
             if (x === y) {
                 return true;
             }
             return String(x) === String(y);
         },
-        object: function (x, y) {
+        object: (x, y) => {
             if (x === y) {
                 return true;
             }
-            var xKeys = Object.keys(x);
-            var yKeys = Object.keys(y);
+            const xKeys = Object.keys(x);
+            const yKeys = Object.keys(y);
             if (xKeys.length !== yKeys.length) {
                 return false;
             }
-            var ifKeysEqual = TYPE_METHODS_MAP.array(xKeys, yKeys);
-            var ifEqual = function (keys) {
+            const ifKeysEqual = TYPE_METHODS_MAP.array(xKeys, yKeys);
+            const ifEqual = (keys) => {
                 if (keys.length <= 0) {
                     return true;
                 }
-                var compareFirst = exports.isCongruence(x[keys[0]], y[keys[0]]);
+                const compareFirst = exports.isCongruence(x[keys[0]], y[keys[0]]);
                 if (keys.length <= 1) {
                     return compareFirst;
                 }
@@ -221,22 +234,24 @@ exports.isCongruence = function (a, b) {
             };
             return ifKeysEqual && ifEqual(xKeys);
         },
-        otherwise: function (x, y) { return x === y; },
+        otherwise: (x, y) => x === y,
     };
     return (TYPE_METHODS_MAP[typeFirst] || TYPE_METHODS_MAP.otherwise)(a, b);
 };
+exports.isCongruence = isCongruence;
 /**
  * A function would reverse the input list
  *
  * @param list list
  * @returns return a list
  */
-exports.reverse = function (list) {
+const reverse = async (list) => {
     if (!list.length) {
         return list;
     }
-    var reverseI = function (outputArr, li) {
-        var currentEle = [li[0]].concat(outputArr);
+    const reverseI = async (outputArr, li) => {
+        await null;
+        const currentEle = [li[0]].concat(outputArr);
         if (li.length <= 1) {
             return currentEle;
         }
@@ -244,6 +259,7 @@ exports.reverse = function (list) {
     };
     return reverseI([], list);
 };
+exports.reverse = reverse;
 /**
  * A function
  *
@@ -251,18 +267,18 @@ exports.reverse = function (list) {
  * @param func
  * @param list
  */
-exports.fragment = function (gap, func, list) {
+const fragment = async (gap, func, list) => {
     if (!list.length) {
         return [];
     }
     if (gap <= 0) {
-        var error = new Error();
+        const error = new Error();
         error.message = "The first parameter should be a positive number";
         throw error;
     }
-    var fragmentI = function (arr, index, gapN, fun, li) {
-        var frag = fun(li.slice(0, gapN), index);
-        var sumArr = arr.concat([frag]);
+    const fragmentI = async (arr, index, gapN, fun, li) => {
+        const frag = fun(li.slice(0, gapN), index);
+        const sumArr = arr.concat([frag]);
         if (li.length <= gap) {
             return sumArr;
         }
@@ -270,18 +286,20 @@ exports.fragment = function (gap, func, list) {
     };
     return fragmentI([], 0, gap, func, list);
 };
+exports.fragment = fragment;
 /**
  * A function return the deduplicated value
  *
  * @param list
  */
-exports.deduplicate = function (list) {
+const deduplicate = async (list) => {
     if (!list.length) {
         return [];
     }
-    var deduplicateI = function (sumArr, li) {
-        var filtedArr = exports.filter(function (v) { return !exports.isCongruence(li[0], v); }, li.slice(1));
-        var arr = sumArr.concat(li[0]);
+    const deduplicateI = async (sumArr, li) => {
+        await null;
+        const filtedArr = await exports.filter(v => !exports.isCongruence(li[0], v), li.slice(1));
+        const arr = sumArr.concat(li[0]);
         if (li.length <= 1) {
             return arr;
         }
@@ -289,4 +307,5 @@ exports.deduplicate = function (list) {
     };
     return deduplicateI([], list);
 };
+exports.deduplicate = deduplicate;
 //# sourceMappingURL=list-methods.js.map

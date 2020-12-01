@@ -1,15 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var list_methods_1 = require("./list-methods");
+exports.rotateMatrix = exports.regenerateMatrix = exports.fibonacciArr = exports.fibonacci = void 0;
+const list_methods_1 = require("./list-methods");
 /**
  * A fibonacci generator function
  *
  * @param n paramter of function, start from 0
  * @returns returns a number of fibonacci number
  */
-exports.fibonacci = function (n) {
-    var fibonacciI = function (forward, afterward, num) {
-        var temSum = forward + afterward;
+const fibonacci = async (n) => {
+    const fibonacciI = async (forward, afterward, num) => {
+        const temSum = forward + afterward;
         if (num <= 0) {
             return afterward;
         }
@@ -17,15 +18,16 @@ exports.fibonacci = function (n) {
     };
     return fibonacciI(0, 1, n);
 };
+exports.fibonacci = fibonacci;
 /**
  * Returns a fibonacci sequence
  *
  * @param n parameter of function, start from 0
  * @returns returns a sequence of fibonacci numbers
  */
-exports.fibonacciArr = function (n) {
-    var fibonacciArrI = function (sumArr, forward, afterward, num) {
-        var temSum = forward + afterward;
+const fibonacciArr = async (n) => {
+    const fibonacciArrI = async (sumArr, forward, afterward, num) => {
+        const temSum = forward + afterward;
         if (num <= 0) {
             return sumArr;
         }
@@ -33,29 +35,33 @@ exports.fibonacciArr = function (n) {
     };
     return fibonacciArrI([1], 0, 1, n);
 };
+exports.fibonacciArr = fibonacciArr;
 /**
  * Regenerate a matrix, e.g. [[1,2,3],[4,5,6],[7,8,9]] --> [[1,4,7],[2,5,8],[3,6,9]]
  *
  * @param matrix an array with same length arrays
  * @returns returns a new matrix
  */
-exports.regenerateMatrix = function (matrix) {
-    var IRegenerateMatrix = function (r, m) {
+const regenerateMatrix = async (matrix) => {
+    const IRegenerateMatrix = async (r, m) => {
+        await null;
         if (!m[0].length) {
             return r;
         }
-        var newRow = r.concat([m.map(function (v) { return v[0]; })]);
-        return IRegenerateMatrix(newRow, m.map(function (v) { return v.slice(1); }));
+        const newRow = r.concat([m.map(v => v[0])]);
+        return IRegenerateMatrix(newRow, m.map(v => v.slice(1)));
     };
     return IRegenerateMatrix([], matrix);
 };
+exports.regenerateMatrix = regenerateMatrix;
 /**
  * Rotate a matrix, [[1,2,3],[4,5,6],[7,8,9]] --> [[3,6,9],[2,5,8],[1,4,7]]
  *
  * @param matrix an array with same length arrays
  * @returns returns new matrix
  */
-exports.rotateMatrix = function (matrix) {
-    return list_methods_1.reverse(exports.regenerateMatrix(matrix));
+const rotateMatrix = async (matrix) => {
+    return list_methods_1.reverse(await exports.regenerateMatrix(matrix));
 };
+exports.rotateMatrix = rotateMatrix;
 //# sourceMappingURL=sequence.js.map
